@@ -13,7 +13,7 @@ service_description:
 #The naming rule is as follows: ^[a-zA-Z0-9]+$|^[a-zA-Z0-9][a-zA-Z0-9_-.]*[a-zA-Z0-9]$.
   name: business-service
 #Indicates a service version
-  version: 1.0.2
+  version: 1.0.5
 servicecomb:
   service:
   #Specifies the service center IP address.
@@ -22,3 +22,11 @@ servicecomb:
   #Specifies the rest transport listening IP address.
   rest:
     address: 0.0.0.0:8080
+    server:
+      thread-count: 30
+    client:
+      thread-count: 30
+  executor:
+    default:
+      group: 1
+      thread-per-group: 100

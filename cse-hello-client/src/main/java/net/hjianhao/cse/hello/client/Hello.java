@@ -20,6 +20,6 @@ package net.hjianhao.cse.hello.client;
 import java.util.concurrent.CompletableFuture;
 
 public interface Hello {
-  public String hello();
+  public CompletableFuture<String> hello();
   public CompletableFuture<String> delay(long milliseconds);
 }

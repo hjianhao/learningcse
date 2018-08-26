@@ -30,8 +30,21 @@ public class HelloConsumer {
 	@RpcReference(microserviceName = "business-service", schemaId = "hello")
 	private Hello hello;
 
+	public void hello() {
+		hello.hello().whenComplete((result, exception) -> {
+			if (exception == null) {
+				String resultString = result;
+				System.out.println("result : " + resultString);
+			} else {
+				System.out.println(exception);
+				System.out.println(exception.getStackTrace());
+			}
+		});
+		
+	}
+
 	public void invokeDelay() {
-		List<CompletableFuture<String>> futures = new ArrayList<CompletableFuture<String>> ();
+		List<CompletableFuture<String>> futures = new ArrayList<CompletableFuture<String>>();
 		for (int i = 0; i < 10; ++i) {
 			CompletableFuture<String> future = hello.delay(i).whenComplete((result, exception) -> {
 				if (exception == null) {
@@ -51,8 +64,9 @@ public class HelloConsumer {
 			});
 			futures.add(future);
 		}
-		CompletableFuture.allOf(futures.toArray(new CompletableFuture[futures.size()])).whenComplete((result, exception) -> {
-			System.out.println("all completed!");
-		});
+		CompletableFuture.allOf(futures.toArray(new CompletableFuture[futures.size()]))
+				.whenComplete((result, exception) -> {
+					System.out.println("all completed!");
+				});
 	}
 }

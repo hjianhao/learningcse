@@ -26,6 +26,10 @@ public class Application {
     BeanUtils.init();
     
     HelloConsumer consumer = BeanUtils.getBean("helloConsumer");
-    consumer.invokeDelay();
+    // consumer.invokeDelay();
+    for (int i = 0; i < 500; ++i) {
+    	consumer.hello ();
+    }
   }
 }
+

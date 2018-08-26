@@ -24,5 +24,6 @@ public class Application {
   public static void main(String[] args) throws Exception {
     Log4jUtils.init();
     BeanUtils.init();
+    System.out.println("The number of CPU cores : " + Runtime.getRuntime().availableProcessors());
   }
 }
